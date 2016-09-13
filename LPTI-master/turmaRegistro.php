@@ -1,28 +1,23 @@
 <?php
     require_once 'init.php';
-    // abre a conexão
+    //abre a conexão
     $PDO = db_connect();
-    // SQL para selecionar os registros
-    $sql = "SELECT idAluno, nomeAluno, frequencia FROM Aluno ORDER BY nomeAluno ASC";
-    // conta o total de registros
-   	//$stmt_count = $PDO->prepare($sql_count);
-    //$stmt_count->execute();
-    //$total = $stmt_count->fetchColumn();
+    //SQL para selecionar os registros
+    $sql = "SELECT idTurma, nomeTurma FROM Turma ORDER BY nomeTurma ASC";
     // seleciona os registros
     $stmt = $PDO->prepare($sql);
     $stmt->execute();
-?> 
-
+?>   
 <!DOCTYPE HTML>
 <html>
 <head>
-		<title>Imperium</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/mainScreen.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
+    <title>Imperium</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/mainScreen.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+</head>
 <body>
 <!-- Content -->
 <div id="content">
@@ -38,29 +33,25 @@
                 -->
                 <h2><a href="#">Bem Vindo ao Imperium</a></h2>
                 <p>Seu Gerenciador Pessoal Acadêmico</p>
-				<br><h3>3º Informática</h3>
             </header>
-			<table>
-				<tr>
-					<td>NOME</td>
-					<td>FREQUÊNCIA</td>
-				</tr>
-				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-				<tr>
-                    <td><a href = "?id=<?php echo $Aluno['idAluno'] ?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
-                    <td><?php echo $Aluno['frequencia'] ?></td>
-                    <td> 
-                        <!--<a href="form-edit-clientes.php?id=<?php echo $cliente['idCliente'] ?>"> Editar
-                        </a>
-                        <a href="delete-clientes.php?id=<?php echo $cliente['idCliente'] ?>"
-                           onclick="return confirm('Tem certeza que deseja excluir?');">  Excluir
-                        </a>-->
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-				<a href="form-add-Aluno.php?id=<?php echo $Aluno['idAluno'] ?>"> Novo</a>
-            </tbody>
-        </table>
+               <!-- <div class="dropdown">
+                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                   Escolha a Sala Desejada
+                   <span class="caret"></span>
+                   </button>
+                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+				<table>
+					<tr>
+						<td>TURMA</td>
+					</tr>
+                    <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+					<tr>
+						<td><a href = "?id=<?php echo $Turma['idTurma'] ?>"><?php echo $Turma['nomeTurma'] ?></a></td>
+                    </tr>
+                   <?php endwhile;?>
+				</table>
+                   </ul>
+                </div>
         </article>
     </div>
 </div>

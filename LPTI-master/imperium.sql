@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 30-Ago-2016 às 17:50
--- Versão do servidor: 5.5.47-0ubuntu0.14.04.1
--- versão do PHP: 5.5.9-1ubuntu4.14
+-- Data de Criação: 13-Set-2016 às 17:25
+-- Versão do servidor: 5.5.49-0ubuntu0.14.04.1
+-- versão do PHP: 5.5.9-1ubuntu4.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -34,7 +34,15 @@ CREATE TABLE IF NOT EXISTS `Aluno` (
   `idTurmaAluno` int(11) NOT NULL,
   PRIMARY KEY (`idAluno`),
   KEY `idTurmaAluno` (`idTurmaAluno`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `Aluno`
+--
+
+INSERT INTO `Aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurmaAluno`) VALUES
+(1, 'Edgard', '151615111098148181', '53', 1),
+(2, 'Tales', '333333333333333333', '666', 1);
 
 -- --------------------------------------------------------
 
@@ -92,10 +100,18 @@ CREATE TABLE IF NOT EXISTS `Nota` (
 --
 
 CREATE TABLE IF NOT EXISTS `Turma` (
-  `idTurma` int(11) NOT NULL,
+  `idTurma` int(11) NOT NULL AUTO_INCREMENT,
   `nomeTurma` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTurma`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `Turma`
+--
+
+INSERT INTO `Turma` (`idTurma`, `nomeTurma`) VALUES
+(1, '3° Informática'),
+(2, '2° Edificações');
 
 --
 -- Constraints for dumped tables
