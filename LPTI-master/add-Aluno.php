@@ -5,10 +5,11 @@
  $nomeAluno = isset($_POST['txtNome']) ? $_POST['txtNome'] : null;
  $matricula = isset($_POST['txtMatricula']) ? $_POST['txtMatricula'] : null;
  $frequencia = isset($_POST['txtFrequencia']) ? $_POST['txtFrequencia'] : null;
+ $idTurmaAluno = isset($_POST['idTurma']) ? $_POST['idTurma'] : null;
  
  // validação simples se campos estão vazios
  
- if (empty($nomeAluno) || empty($matricula) || empty($frequencia)){
+ if (empty($nomeAluno) || empty($matricula) || empty($frequencia) || empty($idTurmaAluno)){
     echo "Campos devem ser preenchidos!!";
     exit;
  }
@@ -17,15 +18,16 @@
  
  
  // instancia objeto aluno
- $Aluno = new Aluno($nomeAluno, $matricula, $frequencia);
+ $Aluno = new Aluno($nomeAluno, $matricula, $frequencia, $idTurmaAluno);
 
  // insere no BD
  $PDO = db_connect();
- $sql = "INSERT INTO Aluno(nomeAluno, matricula, frequencia) VALUES (:nomeAluno, :matricula, :frequencia)";
+ $sql = "INSERT INTO Aluno(nomeAluno, matricula, frequencia, idTurmaAluno) VALUES (:nomeAluno, :matricula, :frequencia, :idTurmaAluno)";
  $stmt = $PDO->prepare($sql);
  $stmt->bindParam(':nomeAluno', $Aluno->getNomeAluno());
  $stmt->bindParam(':matricula', $Aluno->getMatricula());
  $stmt->bindParam(':frequencia', $Aluno->getFrequencia());
+ $stmt->bindParam(':idTurmaAluno', $Aluno->getIdTurmaAluno());
  if($stmt->execute()){
     header ("Location:index.html");
  }else{

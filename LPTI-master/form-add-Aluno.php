@@ -1,5 +1,6 @@
 <?php
     require 'init.php';
+	$aux = $_GET["id"];
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -20,6 +21,7 @@
         <form method ="post" name="formCadastro" action ="add-Aluno.php" enctype="multipart/form-data">
         <h2>Cadastro de Alunos</h2>
             <table width="100%">
+				<input type="hidden" name="idTurma" value="<?php echo $aux ?>">
                 <tr>
                     <th width="18%">Nome do Aluno</th>
                     <td width="82%"><input type="text" name="txtNome"></td>
