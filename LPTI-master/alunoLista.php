@@ -40,10 +40,10 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
-              		<h2>
-						<?php $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)?>
-							<p><?php echo $Turma['nomeTurma']?></p>
-					</h2>
+              	<h2>
+			<?php $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)?>
+			<p><?php echo $Turma['nomeTurma']?></p>
+		</h2>
             </header>
 			<table>
 				<tr>
