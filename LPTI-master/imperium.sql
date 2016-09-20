@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 20-Set-2016 às 15:00
+-- Data de Criação: 20-Set-2016 às 15:03
 -- Versão do servidor: 5.5.47-0ubuntu0.14.04.1
 -- versão do PHP: 5.5.9-1ubuntu4.14
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `Aluno` (
   `idAluno` int(11) NOT NULL AUTO_INCREMENT,
   `nomeAluno` varchar(45) NOT NULL,
   `matricula` varchar(45) NOT NULL,
-  `frequencia` int(45) NOT NULL,
+  `frequencia` int(11) NOT NULL,
   `idTurmaAluno` int(11) NOT NULL,
   PRIMARY KEY (`idAluno`),
   KEY `idTurmaAluno` (`idTurmaAluno`)
