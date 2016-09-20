@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 13-Set-2016 às 17:25
--- Versão do servidor: 5.5.49-0ubuntu0.14.04.1
--- versão do PHP: 5.5.9-1ubuntu4.17
+-- Data de Criação: 20-Set-2016 às 15:00
+-- Versão do servidor: 5.5.47-0ubuntu0.14.04.1
+-- versão do PHP: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,19 +30,21 @@ CREATE TABLE IF NOT EXISTS `Aluno` (
   `idAluno` int(11) NOT NULL AUTO_INCREMENT,
   `nomeAluno` varchar(45) NOT NULL,
   `matricula` varchar(45) NOT NULL,
-  `frequencia` varchar(45) NOT NULL,
+  `frequencia` int(45) NOT NULL,
   `idTurmaAluno` int(11) NOT NULL,
   PRIMARY KEY (`idAluno`),
   KEY `idTurmaAluno` (`idTurmaAluno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Extraindo dados da tabela `Aluno`
 --
 
 INSERT INTO `Aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurmaAluno`) VALUES
-(1, 'Edgard', '151615111098148181', '53', 1),
-(2, 'Tales', '333333333333333333', '666', 1);
+(1, 'Edgard', '151615111098148181', 53, 1),
+(3, 'Willian', '201418110069', 35, 1),
+(4, 'Lavínia', '201418111111', 10, 2),
+(9, 'Teste1', '415151651477845', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -92,6 +94,25 @@ CREATE TABLE IF NOT EXISTS `Nota` (
   KEY `idAtividade` (`idAtividade`,`idAluno`),
   KEY `idAluno` (`idAluno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Senha`
+--
+
+CREATE TABLE IF NOT EXISTS `Senha` (
+  `idSenha` int(11) NOT NULL AUTO_INCREMENT,
+  `senha` varchar(56) NOT NULL,
+  PRIMARY KEY (`idSenha`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `Senha`
+--
+
+INSERT INTO `Senha` (`idSenha`, `senha`) VALUES
+(1, 'admina');
 
 -- --------------------------------------------------------
 
