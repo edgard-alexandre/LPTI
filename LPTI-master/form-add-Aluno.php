@@ -27,15 +27,8 @@
                     <td width="82%"><input type="text" name="txtNome"></td>
                  </tr>
                 <tr>
-                    <th>Matricula</th>
+                    <th>Matrícula</th>
                     <td><input type="text" id="calendario" name="txtMatricula"></td>
-                </tr>
-                <script>
-                    
-                </script>
-                <tr>
-                    <th>Frequência</th>
-                    <td><input type="text" name="txtFrequencia"></td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="btnEnviar" value="Cadastrar"></td>

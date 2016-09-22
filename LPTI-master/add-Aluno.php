@@ -4,12 +4,12 @@
  // pega os dados do formulário
  $nomeAluno = isset($_POST['txtNome']) ? $_POST['txtNome'] : null;
  $matricula = isset($_POST['txtMatricula']) ? $_POST['txtMatricula'] : null;
- $frequencia = isset($_POST['txtFrequencia']) ? $_POST['txtFrequencia'] : null;
+ //$frequencia = isset($_POST['txtFrequencia']) ? $_POST['txtFrequencia'] : null;
  $idTurmaAluno = isset($_POST['idTurma']) ? $_POST['idTurma'] : null;
  
  // validação simples se campos estão vazios
  
- if (empty($nomeAluno) || empty($matricula) || empty($frequencia) || empty($idTurmaAluno)){
+ if (empty($nomeAluno) || empty($matricula) || empty($idTurmaAluno)){
     echo "Campos devem ser preenchidos!!";
     exit;
  }
@@ -18,18 +18,18 @@
  
  
  // instancia objeto aluno
- $Aluno = new Aluno($nomeAluno, $matricula, $frequencia, $idTurmaAluno);
+ $Aluno = new Aluno($nomeAluno, $matricula, $idTurmaAluno);
 
  // insere no BD
  $PDO = db_connect();
- $sql = "INSERT INTO Aluno(nomeAluno, matricula, frequencia, idTurmaAluno) VALUES (:nomeAluno, :matricula, :frequencia, :idTurmaAluno)";
+ $sql = "INSERT INTO Aluno(nomeAluno, matricula, idTurmaAluno) VALUES (:nomeAluno, :matricula, :idTurmaAluno)";
  $stmt = $PDO->prepare($sql);
  $stmt->bindParam(':nomeAluno', $Aluno->getNomeAluno());
  $stmt->bindParam(':matricula', $Aluno->getMatricula());
- $stmt->bindParam(':frequencia', $Aluno->getFrequencia());
+ //$stmt->bindParam(':frequencia', $Aluno->getFrequencia());
  $stmt->bindParam(':idTurmaAluno', $Aluno->getIdTurmaAluno());
  if($stmt->execute()){
-    header ("Location:index.html");
+    header ("Location:turmaRegistro.php");
  }else{
     echo "Erro ao cadastrar!!";
     print_r($stmt->errorInfo());

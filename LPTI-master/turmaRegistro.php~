@@ -31,7 +31,8 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
-			<h2>Lista de Turmas</h2>
+                <h2><a href="#">Bem Vindo ao Imperium</a></h2>
+                <p>Seu Gerenciador Pessoal Acadêmico</p>
             </header>
                <!-- <div class="dropdown">
                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -40,9 +41,12 @@
                    </button>
                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
 				<table>
+					<tr>
+						<td>TURMA</td>
+					</tr>
                     <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 					<tr>
-						<td><a href = "alunoLista.php?id=<?php echo $Turma['idTurma']?>"><?php echo $Turma['nomeTurma'] ?></a></td>
+						<td><a href = "?id=<?php echo $Turma['idTurma'] ?>"><?php echo $Turma['nomeTurma'] ?></a></td>
                     </tr>
                    <?php endwhile;?>
 				</table>

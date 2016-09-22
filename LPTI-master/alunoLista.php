@@ -4,7 +4,7 @@
     $PDO = db_connect();
 	$aux = $_GET["id"];
     // SQL para selecionar os registros
-    $sql = "SELECT idAluno, nomeAluno, frequencia FROM Aluno WHERE idTurmaAluno = :idTurma ORDER BY nomeAluno ASC";
+    $sql = "SELECT idAluno, nomeAluno, matricula, frequencia FROM Aluno WHERE idTurmaAluno = :idTurma ORDER BY nomeAluno ASC";
 	$sql2 = "SELECT idTurma, nomeTurma FROM Turma WHERE idTurma = :idTurma ORDER BY nomeTurma ASC";
     // conta o total de registros
    	//$stmt_count = $PDO->prepare($sql_count);
@@ -40,6 +40,7 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
+		<a href = "turmaRegistro.php">voltar</a><br>
               	<h2>
 			<?php $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)?>
 			<p><?php echo $Turma['nomeTurma']?></p>
@@ -47,13 +48,15 @@
             </header>
 			<table>
 				<tr>
-					<td>NOME</td>
-					<td>FREQUÊNCIA</td>
+					<td><h5>NOME</h5></td>
+					<td><h5>MATRÍCULA</h5></td>
+					<td><h5>FREQUÊNCIA</h5></td>
 				</tr>
 				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 				<tr>
-                    <td><a href = "00?id=<?php echo $Aluno['idAluno'] ?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
-                    <td><?php echo $Aluno['frequencia'] ?></td>
+                    <td><a href = "?id=<?php echo $Aluno['idAluno'] ?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
+					<td><?php echo $Aluno['matricula'] ?></a></td>
+                    <td><input type = "number" name = "frequencia[<?php echo $Aluno['idAluno'] ?>]"></td>
                     <td> 
                         <!--<a href="form-edit-clientes.php?id=<?php echo $cliente['idCliente'] ?>"> Editar
                         </a>
@@ -63,10 +66,13 @@
                     </td>
                 </tr>
                 <?php endwhile; ?>
-				<a href="form-add-Aluno.php?id=<?php echo $Turma['idTurma'] ?>"> Novo</a>
+				<a href="form-add-Aluno.php?id=<?php echo $Turma['idTurma'] ?>"> Novo</a><br>
+				<a href="editAluno.php?id=<?php echo $Turma['idTurma']?>"> Salvar Modificações</a>
             </tbody>
         </table>
         </article>
+		<!--EXCLUIR Turma-->
+			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente esta turma?')) location.href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>';"><img src = "images/pbi_deleteicon.png"></a>
     </div>
 </div>
 
