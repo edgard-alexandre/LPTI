@@ -15,7 +15,7 @@
 	$stmt2 = $PDO->prepare($sql2);
     $stmt->execute(array(':idTurma' => $aux));
 	$stmt2->execute(array(':idTurma' => $aux));
-?> 
+?>
 
 <!DOCTYPE HTML>
 <html>
@@ -40,8 +40,8 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
-		<a href = "turmaRegistro.php">voltar</a><br>
-              	<h2>
+		<a href = "turmaRegistro.php"><img src = "images/icone-voltar.png"></a><br>
+        <h2>
 			<?php $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)?>
 			<p><?php echo $Turma['nomeTurma']?></p>
 		</h2>
@@ -54,9 +54,9 @@
 				</tr>
 				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 				<tr>
-                    <td><a href = "?id=<?php echo $Aluno['idAluno'] ?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
+                    <td><a href = "alunoRegistro.php?id=<?php echo $Aluno['idAluno']?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
 					<td><?php echo $Aluno['matricula'] ?></a></td>
-                    <td><input type = "number" name = "frequencia[<?php echo $Aluno['idAluno'] ?>]"></td>
+                    <td><input type = "number" name = "<?php echo $Aluno['idAluno']?>" value = "<?php echo $Aluno['frequencia'] ?>"></td>
                     <td> 
                         <!--<a href="form-edit-clientes.php?id=<?php echo $cliente['idCliente'] ?>"> Editar
                         </a>
@@ -67,7 +67,8 @@
                 </tr>
                 <?php endwhile; ?>
 				<a href="form-add-Aluno.php?id=<?php echo $Turma['idTurma'] ?>"> Novo</a><br>
-				<a href="editAluno.php?id=<?php echo $Turma['idTurma']?>"> Salvar Modificações</a>
+				<a href="#"> Salvar Modificações</a>
+                <!--editAluno.php?id="ID TURMA COMO PARÂMETRO"-->
             </tbody>
         </table>
         </article>

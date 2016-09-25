@@ -2,13 +2,13 @@
     class Aluno{
         private $nomeAluno;
         private $matricula;
-        //private $frequencia;
+        private $frequencia;
 		private $idTurmaAluno;
     
-        public function __construct($nomeAluno, $matricula, $idTurmaAluno){
+        public function __construct($nomeAluno, $matricula, $frequencia, $idTurmaAluno){
             $this->setNomeAluno($nomeAluno);
             $this->setMatricula($matricula);
-           // $this->setFrequencia($frequencia);
+            $this->setFrequencia($frequencia);
 			$this->setIdTurmaAluno($idTurmaAluno);
         }
         
@@ -29,11 +29,11 @@
         }
         
         public function getFrequencia(){
-            return $this->frequencia;
+          return $this->frequencia;
         }
         
        	public function setFrequencia($frequencia){
-           $this->frequencia = $frequencia;
+          $this->frequencia = $frequencia;
         }
 
 		public function getIdTurmaAluno(){

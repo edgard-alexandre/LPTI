@@ -45,6 +45,7 @@
 						<td><a href = "alunoLista.php?id=<?php echo $Turma['idTurma']?>"><?php echo $Turma['nomeTurma'] ?></a></td>
                     </tr>
                    <?php endwhile;?>
+                    <a href="form-add-Turma.php"> Novo</a><br>
 				</table>
                    </ul>
                 </div>

@@ -4,7 +4,7 @@
  // pega os dados do formulário
  $nomeAluno = isset($_POST['txtNome']) ? $_POST['txtNome'] : null;
  $matricula = isset($_POST['txtMatricula']) ? $_POST['txtMatricula'] : null;
- //$frequencia = isset($_POST['txtFrequencia']) ? $_POST['txtFrequencia'] : null;
+ $frequencia = NULL;
  $idTurmaAluno = isset($_POST['idTurma']) ? $_POST['idTurma'] : null;
  
  // validação simples se campos estão vazios
@@ -18,7 +18,7 @@
  
  
  // instancia objeto aluno
- $Aluno = new Aluno($nomeAluno, $matricula, $idTurmaAluno);
+ $Aluno = new Aluno($nomeAluno, $matricula, $frequencia, $idTurmaAluno);
 
  // insere no BD
  $PDO = db_connect();

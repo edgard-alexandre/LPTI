@@ -1,17 +1,6 @@
 <?php
-    require_once 'init.php';
-    // abre a conexão
-    $PDO = db_connect();
-	$aux = $_GET["id"];
-    // SQL para selecionar os registros
-    $sql = "SELECT idAluno, nomeAluno, matricula, frequencia, idTurmaAluno FROM Aluno WHERE idAluno = :idAluno ORDER BY nomeAluno ASC";
-	$sql2 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade ORDER BY bimestreAtividade ASC";
-    // seleciona os registros
-    $stmt = $PDO->prepare($sql);
-	$stmt2 = $PDO->prepare($sql2);
-    $stmt->execute(array(':idAluno' => $aux));
+    require 'init.php';
 ?>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -28,38 +17,19 @@
     <div class="inner">
 
         <!-- Post -->
-        <article class="box post post-excerpt">
-            <header>
-                <!--
-                    Note: Titles and subtitles will wrap automatically when necessary, so don't worry
-                    if they get too long. You can also remove the <p> entirely if you don't
-                    need a subtitle.
-                -->
-        <?php $Aluno = $stmt->fetch(PDO::FETCH_ASSOC)?>
-		<a href = "alunoLista.php?id=<?php echo $Aluno['idTurmaAluno']?>"><img src = "images/icone-voltar.png"></a><br>
-            <h2><p><?php echo $Aluno['nomeAluno']?></p></h2> 
-            <h3><p><?php echo $Aluno['matricula']?></p></h3>
-            <?php $stmt2->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
-            </header>
-			<table>
-				<tr>
-					<td><h5>ATIVIDADE</h5></td>
-					<td><h5>VALOR</h5></td>
-					<td><h5>BIMESTRE</h5></td>
-                    <td><h5>NOTA</h5></td>
-				</tr>
-				 <?php while($Atividade = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
-                        <tr>
-                            <td><?php echo $Atividade['nomeAtividade'] ?></td>
-                            <td><?php echo $Atividade['valorAtividade'] ?></td>
-                            <td><?php echo $Atividade['bimestreAtividade'] ?></td>
-                        </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-        </article>
-		<!--EXCLUIR Turma-->
-			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente esta turma?')) location.href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>';"><img src = "images/pbi_deleteicon.png"></a>
+        <form method ="post" name="formCadastro" action ="add-Turma.php" enctype="multipart/form-data">
+        <h2>Cadastro de Turmas</h2>
+            <table width="100%">
+                <tr>
+                    <th width="18%">Nome da Turma</th>
+                    <td width="82%"><input type="text" name="txtNomeTurma"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="btnEnviar" value="Cadastrar"></td>
+                    <td><input type="reset" name="btnLimpar" value="Limpar"></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 
@@ -70,11 +40,11 @@
 					<h1 id="logo"><a href="#">Imperium</a></h1>
 
 
-				<!-- Nav -->
+				<!-- Nav v-->
 					<nav id="nav">
 						<ul>
 							<li><a href="indexMain.html">Principal</a></li>
-							<li class="current"><a href="turmaRegistro.php">Registro de Alunos</a></li>
+							<li class="current"><a href="alunoRegistro.html">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
 							<li><a href="relatorios.html">Atividades</a></li>
 						</ul>
