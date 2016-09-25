@@ -39,7 +39,9 @@
 		<a href = "alunoLista.php?id=<?php echo $Aluno['idTurmaAluno']?>"><img src = "images/icone-voltar.png"></a><br>
             <h2><p><?php echo $Aluno['nomeAluno']?></p></h2> 
             <h3><p><?php echo $Aluno['matricula']?></p></h3>
+                
             <?php $stmt2->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
+                
             </header>
 			<table>
 				<tr>
@@ -58,8 +60,9 @@
             </tbody>
         </table>
         </article>
-		<!--EXCLUIR Turma-->
-			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente esta turma?')) location.href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>';"><img src = "images/pbi_deleteicon.png"></a>
+    
+		<!--EXCLUIR Aluno-->
+			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente este aluno?')) location.href = 'deleteAluno.php?id=<?php echo $Aluno['idAluno']?>';"><img src = "images/pbi_deleteicon.png"></a>
     </div>
 </div>
 
