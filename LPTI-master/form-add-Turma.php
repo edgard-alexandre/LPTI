@@ -15,7 +15,7 @@
 <!-- Content -->
 <div id="content">
     <div class="inner">
-
+        <a href = "turmaRegistro.php"><img src = "images/icone-voltar.png"></a><br>
         <!-- Post -->
         <form method ="post" name="formCadastro" action ="add-Turma.php" enctype="multipart/form-data">
         <h2>Cadastro de Turmas</h2>

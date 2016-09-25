@@ -16,7 +16,7 @@
 <!-- Content -->
 <div id="content">
     <div class="inner">
-
+        <a href = "alunoLista.php?id=<?php echo $aux ?>"><img src = "images/icone-voltar.png"></a><br>
         <!-- Post -->
         <form method ="post" name="formCadastro" action ="add-Aluno.php" enctype="multipart/form-data">
         <h2>Cadastro de Alunos</h2>
