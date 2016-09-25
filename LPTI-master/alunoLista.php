@@ -26,6 +26,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/mainScreen.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 <body>
 <!-- Content -->
@@ -47,7 +48,7 @@
 		</h2>
             </header>
 			<table>
-				<tr>
+				<tr id="listaAluno">
 					<td><h5>NOME</h5></td>
 					<td><h5>MATRÍCULA</h5></td>
 					<td><h5>FREQUÊNCIA</h5></td>
