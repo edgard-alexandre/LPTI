@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 25-Set-2016 às 03:06
+-- Data de Criação: 25-Set-2016 às 05:22
 -- Versão do servidor: 5.5.28
 -- versão do PHP: 5.3.19
 
@@ -36,23 +36,24 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   `idTurmaAluno` int(11) NOT NULL,
   PRIMARY KEY (`idAluno`),
   KEY `idTurmaAluno` (`idTurmaAluno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- Extraindo dados da tabela `aluno`
 --
 
 INSERT INTO `aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurmaAluno`) VALUES
-(1, 'Edgard Alexandre Ribeiro', '151615111098148181', 45, 1),
-(3, 'Pedro', '9831742365322957', 53, 1),
-(4, 'Vitor', '3242342252384834', 17, 1),
+(1, 'Edgard Alexandre Ribeiro', '201418110086', 45, 1),
+(3, 'Pedro de Deus Barbosa', '9831742365322957', 53, 1),
+(4, 'Vitor Carvalho de Melo', '3242342252384834', 17, 1),
 (13, 'Teste', '23426242423442', 76, 2),
-(14, 'Willian', '23423523232', 34, 1),
+(14, 'Willian Alves de Almeida', '23423523232', 34, 1),
 (15, 'Guilherme', '1237513752', NULL, 6),
 (17, 'Nicholas', '21541557451', NULL, 8),
 (18, 'Ivys', '785387284124', NULL, 8),
 (19, 'Não Faz Nada ', '2414234243422', NULL, 2),
-(20, 'Não Faz Nada 2', '2353525232355', NULL, 2);
+(21, 'Não Faz Nada 2', '234262424234', NULL, 2),
+(24, 'Uma Pessoa', '216741476421', NULL, 11);
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `atividade` (
   `idTurmaAtividade` int(11) NOT NULL,
   PRIMARY KEY (`idAtividade`),
   KEY `idTurmaAtividade` (`idTurmaAtividade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Extraindo dados da tabela `atividade`
@@ -95,7 +96,12 @@ INSERT INTO `atividade` (`idAtividade`, `nomeAtividade`, `valorAtividade`, `bime
 (1, 'Prova LP2', 10, '1º Bimestre', 'Prova', 1),
 (2, 'Prova de Física', 8, '3º Bimestre', 'Prova', 1),
 (3, 'Prova de LP1', 12, '2º Bimestre', 'Prova', 6),
-(4, 'Trabalho de Português', 6, '1º Bimestre', 'Trabalho', 8);
+(4, 'Trabalho de Português', 6, '1º Bimestre', 'Trabalho', 8),
+(5, 'Dever de História', 3.5, '2º Bimestre', 'Dever', 1),
+(6, 'Prova de Matemática', 7, '2º Bimestre', 'Prova', 1),
+(7, 'Trabalho de Geografia', 8.5, '3º Bimestre', 'Trabalho', 6),
+(8, 'Prova de Física', 8, '1º Bimestre', 'Prova', 8),
+(9, 'Redação', 6, '3º Bimestre', 'Redação', 8);
 
 -- --------------------------------------------------------
 
@@ -149,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `turma` (
   `idTurma` int(11) NOT NULL AUTO_INCREMENT,
   `nomeTurma` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTurma`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Extraindo dados da tabela `turma`
@@ -159,7 +165,9 @@ INSERT INTO `turma` (`idTurma`, `nomeTurma`) VALUES
 (1, '3° Informática'),
 (2, '2° Edificações'),
 (6, '1º Informática'),
-(8, '2º Mecatrônica');
+(8, '2º Mecatrônica'),
+(10, '3º Mecatrônica'),
+(11, '2º Informática');
 
 --
 -- Constraints for dumped tables
