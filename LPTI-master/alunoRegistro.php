@@ -3,6 +3,10 @@
     // abre a conexão
     $PDO = db_connect();
 	$aux = $_GET["id"];
+    $pnota = NULL;
+    $snota = NULL;
+    $tnota = NULL;
+    $qnota = NULL;
     // SQL para selecionar os registros
     $sql = "SELECT idAluno, nomeAluno, matricula, frequencia, idTurmaAluno FROM Aluno WHERE idAluno = :idAluno ORDER BY nomeAluno ASC";
 	$sql2 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '1º Bimestre' ORDER BY bimestreAtividade ASC";
@@ -55,11 +59,11 @@
             <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>    
         
 			<table>
-                <tr id="pbim">
+                <tr id="bim">
                     <td><h5>1º Bimestre</h5></td>
                     <td><h5> </h5></td>
 					<td><h5> </h5></td>
-                    <td>NOTA TOTAL:</td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td><h5>-</h5></td>
@@ -78,20 +82,27 @@
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
                                    <td><?php echo $Nota['valorNota'] ?></td> 
+                                    <?php $pnota = $pnota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
                         </tr>
-                        $stmt6 = $PDO->prepare($sql6);
+                        <?php $stmt6 = $PDO->prepare($sql6); ?>
                         <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>   
                 <?php endwhile; ?>
+                <tr id = "bim">
+                    <td><h5>NOTA TOTAL: <?php echo $pnota ?>/20</h5></td>
+                    <td><h5> </h5></td>
+					<td><h5> </h5></td>
+                    <td> </td>
+                </tr>
                 <tr>
                     <td><h5>-</h5></td>
                 </tr>
-                <tr id="sbim">
+                <tr id="bim">
                     <td><h5>2º Bimestre</h5></td>
                     <td><h5> </h5></td>
 					<td><h5> </h5></td>
-                    <td>NOTA TOTAL:</td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td><h5>-</h5></td>
@@ -110,20 +121,27 @@
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
                                    <td><?php echo $Nota['valorNota'] ?></td> 
+                                    <?php $snota = $snota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
                         </tr>
-                        $stmt6 = $PDO->prepare($sql6);
+                        <?php $stmt6 = $PDO->prepare($sql6); ?>
                         <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>  
                 <?php endwhile; ?>
+                <tr id = "bim">
+                    <td><h5>NOTA TOTAL: <?php echo $snota ?>/30</h5></td>
+                    <td><h5> </h5></td>
+					<td><h5> </h5></td>
+                    <td> </td>
+                </tr>
                 <tr>
                     <td><h5>-</h5></td>
                 </tr>
-                <tr id="tbim">
+                <tr id="bim">
                     <td><h5>3º Bimestre</h5></td>
                     <td><h5> </h5></td>
 					<td><h5> </h5></td>
-                    <td>NOTA TOTAL:</td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td><h5>-</h5></td>
@@ -142,20 +160,27 @@
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
                                    <td><?php echo $Nota['valorNota'] ?></td> 
+                                   <?php $tnota = $tnota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
                         </tr>
-                        $stmt6 = $PDO->prepare($sql6);
+                        <?php $stmt6 = $PDO->prepare($sql6); ?>
                         <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>  
                 <?php endwhile; ?>
+                <tr id = "bim">
+                    <td><h5>NOTA TOTAL: <?php echo $tnota ?>/20</h5></td>
+                    <td><h5> </h5></td>
+					<td><h5> </h5></td>
+                    <td> </td>
+                </tr>
                 <tr>
                     <td><h5>-</h5></td>
                 </tr>
-                <tr id="qbim">
+                <tr id="bim">
                     <td><h5>4º Bimestre</h5></td>
                     <td><h5> </h5></td>
 					<td><h5> </h5></td>
-                    <td>NOTA TOTAL:</td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td><h5>-</h5></td>
@@ -171,8 +196,22 @@
                             <td><?php echo $Atividade['nomeAtividade'] ?></td>
                             <td><?php echo $Atividade['valorAtividade'] ?></td>
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
+                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
+                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
+                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                   <?php $qnota = $qnota + $Nota['valorNota']; ?>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
                         </tr>
+                        <?php $stmt6 = $PDO->prepare($sql6); ?>
+                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?> 
                 <?php endwhile; ?>
+                <tr id = "bim">
+                    <td><h5>NOTA TOTAL: <?php echo $qnota ?>/30</h5></td>
+                    <td><h5> </h5></td>
+					<td><h5> </h5></td>
+                    <td> </td>
+                </tr>
             </tbody>
         </table>
         </article>
