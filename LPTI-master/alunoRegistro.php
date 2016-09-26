@@ -9,12 +9,14 @@
     $sql3 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '2º Bimestre' ORDER BY bimestreAtividade ASC";
     $sql4 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '3º Bimestre' ORDER BY bimestreAtividade ASC";
     $sql5 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '4º Bimestre' ORDER BY bimestreAtividade ASC";
+    $sql6 = "SELECT idNota, idAtividade, idAluno, valorNota FROM Nota WHERE idAluno = :idAlunoNota";
     // seleciona os registros
     $stmt = $PDO->prepare($sql);
 	$stmt2 = $PDO->prepare($sql2);
     $stmt3 = $PDO->prepare($sql3);
     $stmt4 = $PDO->prepare($sql4);
     $stmt5 = $PDO->prepare($sql5);
+    $stmt6 = $PDO->prepare($sql6);
     $stmt->execute(array(':idAluno' => $aux));
 ?>
 
@@ -36,7 +38,6 @@
 
         <!-- Post -->
         <article class="box post post-excerpt">
-            <header>
                 <!--
                     Note: Titles and subtitles will wrap automatically when necessary, so don't worry
                     if they get too long. You can also remove the <p> entirely if you don't
@@ -51,8 +52,8 @@
             <?php $stmt3->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
             <?php $stmt4->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
             <?php $stmt5->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
-                
-            </header>
+            <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>    
+        
 			<table>
                 <tr id="pbim">
                     <td><h5>1º Bimestre</h5></td>
@@ -74,7 +75,14 @@
                             <td><?php echo $Atividade['nomeAtividade'] ?></td>
                             <td><?php echo $Atividade['valorAtividade'] ?></td>
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
+                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
+                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
+                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                <?php endif; ?>
+                            <?php endwhile; ?>
                         </tr>
+                        $stmt6 = $PDO->prepare($sql6);
+                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>   
                 <?php endwhile; ?>
                 <tr>
                     <td><h5>-</h5></td>
@@ -99,7 +107,14 @@
                             <td><?php echo $Atividade['nomeAtividade'] ?></td>
                             <td><?php echo $Atividade['valorAtividade'] ?></td>
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
+                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
+                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
+                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                <?php endif; ?>
+                            <?php endwhile; ?>
                         </tr>
+                        $stmt6 = $PDO->prepare($sql6);
+                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>  
                 <?php endwhile; ?>
                 <tr>
                     <td><h5>-</h5></td>
@@ -124,7 +139,14 @@
                             <td><?php echo $Atividade['nomeAtividade'] ?></td>
                             <td><?php echo $Atividade['valorAtividade'] ?></td>
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
+                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
+                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
+                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                <?php endif; ?>
+                            <?php endwhile; ?>
                         </tr>
+                        $stmt6 = $PDO->prepare($sql6);
+                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>  
                 <?php endwhile; ?>
                 <tr>
                     <td><h5>-</h5></td>

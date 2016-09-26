@@ -17,12 +17,25 @@
 	}
 
 	#senha{
-		width: 500px; 
+		width: 500px;
+        heigth: 500px;
 		position: absolute; 
         left: 50%;
+        top: 100%;
         margin-left:-250px;
-        top: 385px;
+        margin-top:-250px;
 	}
+
+    #teste{
+		width: 500px;
+        heigth: 500px;
+		position: absolute; 
+        left: 50%;
+        top: 100%;
+        margin-left:-250px;
+        margin-top:-250px;
+	}
+
 	#botao{
 		position: absolute;
         left: 1300px;
