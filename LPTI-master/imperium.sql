@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 25-Set-2016 às 13:37
+-- Data de Criação: 26-Set-2016 às 00:16
 -- Versão do servidor: 5.5.28
 -- versão do PHP: 5.3.19
 
@@ -36,24 +36,23 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   `idTurmaAluno` int(11) NOT NULL,
   PRIMARY KEY (`idAluno`),
   KEY `idTurmaAluno` (`idTurmaAluno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Extraindo dados da tabela `aluno`
 --
 
 INSERT INTO `aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurmaAluno`) VALUES
-(1, 'Edgard Alexandre Ribeiro', '201418110086', 45, 1),
-(3, 'Pedro de Deus Barbosa', '9831742365322957', 53, 1),
-(4, 'Vitor Carvalho de Melo', '3242342252384834', 17, 1),
+(1, 'Edgard Alexandre Ribeiro', '201418110086', 35, 1),
+(3, 'Pedro de Deus Barbosa', '201418110138', 53, 1),
+(4, 'Vitor Carvalho de Melo', '201418110079', 73, 1),
 (13, 'Teste', '23426242423442', 76, 2),
-(14, 'Willian Alves de Almeida', '23423523232', 34, 1),
+(14, 'Willian Alves de Almeida', '201418110169', 80, 1),
 (15, 'Guilherme', '1237513752', NULL, 6),
 (17, 'Nicholas', '21541557451', NULL, 8),
 (18, 'Ivys', '785387284124', NULL, 8),
 (19, 'Não Faz Nada ', '2414234243422', NULL, 2),
-(21, 'Não Faz Nada 2', '234262424234', NULL, 2),
-(24, 'Uma Pessoa', '216741476421', NULL, 11);
+(21, 'Não Faz Nada 2', '234262424234', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -86,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `atividade` (
   `idTurmaAtividade` int(11) NOT NULL,
   PRIMARY KEY (`idAtividade`),
   KEY `idTurmaAtividade` (`idTurmaAtividade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Extraindo dados da tabela `atividade`
@@ -101,7 +100,8 @@ INSERT INTO `atividade` (`idAtividade`, `nomeAtividade`, `valorAtividade`, `bime
 (6, 'Prova de Matemática', 7, '2º Bimestre', 'Prova', 1),
 (7, 'Trabalho de Geografia', 8.5, '3º Bimestre', 'Trabalho', 6),
 (8, 'Prova de Física', 8, '1º Bimestre', 'Prova', 8),
-(9, 'Redação', 6, '3º Bimestre', 'Redação', 8);
+(9, 'Redação', 6, '3º Bimestre', 'Redação', 8),
+(10, 'Apresentação de Literatura', 8, '1º Bimestre', 'Apresentação', 1);
 
 -- --------------------------------------------------------
 
@@ -117,14 +117,33 @@ CREATE TABLE IF NOT EXISTS `nota` (
   PRIMARY KEY (`idNota`),
   KEY `idAtividade` (`idAtividade`,`idAluno`),
   KEY `idAluno` (`idAluno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- Extraindo dados da tabela `nota`
 --
 
 INSERT INTO `nota` (`idNota`, `idAtividade`, `idAluno`, `valorNota`) VALUES
-(1, 1, 1, 10);
+(1, 1, 1, 10),
+(2, 1, 3, 7),
+(4, 1, 4, 10),
+(5, 5, 1, 1),
+(6, 5, 3, 3.4),
+(7, 5, 4, 3.5),
+(8, 6, 1, 5),
+(9, 10, 1, 6),
+(10, 2, 1, 8),
+(11, 10, 3, 2),
+(12, 6, 3, 4.2),
+(13, 2, 3, 2),
+(14, 10, 4, 7.5),
+(15, 6, 4, 6.8),
+(16, 2, 4, 6),
+(17, 1, 14, 9),
+(18, 10, 14, 7.2),
+(19, 5, 14, 3.5),
+(20, 6, 14, 5),
+(21, 2, 14, 8);
 
 -- --------------------------------------------------------
 
@@ -155,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `turma` (
   `idTurma` int(11) NOT NULL AUTO_INCREMENT,
   `nomeTurma` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTurma`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Extraindo dados da tabela `turma`
@@ -166,8 +185,8 @@ INSERT INTO `turma` (`idTurma`, `nomeTurma`) VALUES
 (2, '2° Edificações'),
 (6, '1º Informática'),
 (8, '2º Mecatrônica'),
-(10, '3º Mecatrônica'),
-(11, '2º Informática');
+(13, '3º Mecatrônica'),
+(14, '1º Edificações');
 
 --
 -- Constraints for dumped tables
@@ -195,8 +214,8 @@ ALTER TABLE `atividade`
 -- Limitadores para a tabela `nota`
 --
 ALTER TABLE `nota`
-  ADD CONSTRAINT `Nota_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`idAluno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Nota_ibfk_1` FOREIGN KEY (`idAtividade`) REFERENCES `atividade` (`idAtividade`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Nota_ibfk_1` FOREIGN KEY (`idAtividade`) REFERENCES `atividade` (`idAtividade`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Nota_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`idAluno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
