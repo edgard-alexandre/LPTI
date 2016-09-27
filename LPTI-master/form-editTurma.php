@@ -1,22 +1,13 @@
 <?php
-    require_once 'init.php';
-    // abre a conexão
-    $PDO = db_connect();
+	require 'init.php';
+	//pega o ID da URL
+	$PDO = db_connect();
 	$aux = $_GET["id"];
-    // SQL para selecionar os registros
-    $sql = "SELECT idAluno, nomeAluno, matricula, frequencia FROM Aluno WHERE idTurmaAluno = :idTurma ORDER BY nomeAluno ASC";
-	$sql2 = "SELECT idTurma, nomeTurma FROM Turma WHERE idTurma = :idTurma ORDER BY nomeTurma ASC";
-    // conta o total de registros
-   	//$stmt_count = $PDO->prepare($sql_count);
-    //$stmt_count->execute();
-    //$total = $stmt_count->fetchColumn();
-    // seleciona os registros
-    $stmt = $PDO->prepare($sql);
-	$stmt2 = $PDO->prepare($sql2);
-    $stmt->execute(array(':idTurma' => $aux));
-	$stmt2->execute(array(':idTurma' => $aux));
+	$sql = "SELECT idTurma, nomeTurma FROM Turma WHERE idTurma = :idTurma ORDER BY nomeTurma ASC";
+	$stmt = $PDO->prepare($sql);
+	$stmt->execute(array(':idTurma' => $aux));
+	$Turma = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -26,56 +17,25 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/mainScreen.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-        <link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 <body>
 <!-- Content -->
 <div id="content">
     <div class="inner">
-
+        <a href = "alunoLista.php?id=<?php echo $aux ?>"><img src = "images/icone-voltar.png"></a><br>
         <!-- Post -->
-        <article class="box post post-excerpt">
-            <header>
-                <!--
-                    Note: Titles and subtitles will wrap automatically when necessary, so don't worry
-                    if they get too long. You can also remove the <p> entirely if you don't
-                    need a subtitle.
-                -->
-		<a href = "turmaRegistro.php"><img src = "images/icone-voltar.png"></a><br>
-        <h2>
-			<?php $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)?>
-			<p><?php echo $Turma['nomeTurma']?></p>
-		</h2>
-            </header>
-			<table>
-				<tr id="listaAluno">
-					<td><h5>NOME</h5></td>
-					<td><h5>MATRÍCULA</h5></td>
-					<td><h5>FREQUÊNCIA</h5></td>
-				</tr>
-				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-				<tr>
-                    <td><a href = "alunoRegistro.php?id=<?php echo $Aluno['idAluno']?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
-					<td><?php echo $Aluno['matricula'] ?></a></td>
-                    <td><input type = "number" name = "<?php echo $Aluno['idAluno']?>" value = "<?php echo $Aluno['frequencia'] ?>"></td>
-                    <td> 
-                        <!--<a href="form-edit-clientes.php?id=<?php echo $cliente['idCliente'] ?>"> Editar
-                        </a>
-                        <a href="delete-clientes.php?id=<?php echo $cliente['idCliente'] ?>"
-                           onclick="return confirm('Tem certeza que deseja excluir?');">  Excluir
-                        </a>-->
-                    </td>
+        <form method ="post" name="formCadastro" action ="editTurma.php?id=<?php echo $Turma['idTurma']?>" enctype="multipart/form-data">
+        <h2>Alterando informações da Turma</h2>
+            <table width="100%">
+                    <th width="18%">Nome daTurma</th>
+                    <td width="82%"><input type="text" name="txtNome" value="<?php echo $Turma['nomeTurma']?>"></td>
+                 </tr>
+                <tr>
+                    <td><input type="submit" name="btnEnviar" value="Salvar"></td>
+                    <td><input type="reset" name="btnLimpar" value="Limpar"></td>
                 </tr>
-                <?php endwhile; ?>
-				<a href="form-add-Aluno.php?id=<?php echo $Turma['idTurma'] ?>"> Novo</a><br>
-				<a href="#"> Salvar Modificações</a>
-                <!--editAluno.php?id="ID TURMA COMO PARÂMETRO"-->
-            </tbody>
-        </table>
-        </article>
-		<!--EXCLUIR Turma-->
-			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente esta turma?')) location.href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>';"><img src = "images/pbi_deleteicon.png"></a>
-            <a href='form-editTurma.php?id=<?php echo $Turma['idTurma']?>'>Editar</a>
+            </table>
+        </form>
     </div>
 </div>
 
@@ -86,11 +46,11 @@
 					<h1 id="logo"><a href="#">Imperium</a></h1>
 
 
-				<!-- Nav -->
+				<!-- Nav v-->
 					<nav id="nav">
 						<ul>
 							<li><a href="indexMain.html">Principal</a></li>
-							<li class="current"><a href="turmaRegistro.php">Registro de Alunos</a></li>
+							<li class="current"><a href="alunoRegistro.html">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
 							<li><a href="relatorios.html">Atividades</a></li>
 						</ul>

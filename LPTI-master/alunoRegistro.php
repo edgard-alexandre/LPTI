@@ -206,6 +206,7 @@
     
 		<!--EXCLUIR Aluno-->
         <a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente este aluno?')) location.href = 'deleteAluno.php?id=<?php echo $Aluno['idAluno']?>';"><img src = "images/pbi_deleteicon.png"></a>
+        <a href='form-editAluno.php?id=<?php echo $Aluno['idAluno']?>'>Editar</a>
     </div>
 </div>
 
