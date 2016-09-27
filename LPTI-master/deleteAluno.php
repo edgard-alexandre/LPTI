@@ -13,7 +13,7 @@
 	$stmt = $PDO->prepare($sql);
 	$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 	if($stmt->execute()){
-		header ('Location:turmaRegistro.php');
+        header ("Location:alunoLista.php?id=$aux");
 	}else{
 		echo "Erro ao excluir";
 		print_r($stmt->errorInfo());

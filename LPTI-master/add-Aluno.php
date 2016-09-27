@@ -29,7 +29,7 @@
  //$stmt->bindParam(':frequencia', $Aluno->getFrequencia());
  $stmt->bindParam(':idTurmaAluno', $Aluno->getIdTurmaAluno());
  if($stmt->execute()){
-    header ("Location:turmaRegistro.php");
+    header ("Location:alunoLista.php?id=$idTurmaAluno");
  }else{
     echo "Erro ao cadastrar!!";
     print_r($stmt->errorInfo());

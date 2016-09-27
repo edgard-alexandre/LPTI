@@ -3,25 +3,25 @@
     // abre a conexão
     $PDO = db_connect();
 	$aux = $_GET["id"];
-    $pnota = NULL;
-    $snota = NULL;
-    $tnota = NULL;
-    $qnota = NULL;
     // SQL para selecionar os registros
-    $sql = "SELECT idAluno, nomeAluno, matricula, frequencia, idTurmaAluno FROM Aluno WHERE idAluno = :idAluno ORDER BY nomeAluno ASC";
-	$sql2 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '1º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql3 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '2º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql4 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '3º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql5 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idTurmaAtividade = :idTurmaAtividade && bimestreAtividade = '4º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql6 = "SELECT idNota, idAtividade, idAluno, valorNota FROM Nota WHERE idAluno = :idAlunoNota";
-    // seleciona os registros
+    $sql = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idAtividade = :idAtividade";
     $stmt = $PDO->prepare($sql);
-	$stmt2 = $PDO->prepare($sql2);
+    $stmt->execute(array(':idAtividade' => $aux));
+    $Atividade = $stmt->fetch(PDO::FETCH_ASSOC)
+    echo $Atividade['idTurmaAtividade'];
+        
+    $sql2 = "SELECT idTurma, nomeTurma FROM Turma WHERE idTurma = :idTurma";
+    $stmt2 = $PDO->prepare($sql2);
+    $stmt2->execute(array(':idTurma' => $Atividade['idTurmaAtividade']));
+    $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)
+
+    $sq3 = "SELECT idAluno, nomeAluno, matricula, idTurmaAluno FROM Aluno WHERE idTurmaAluno = :idTurmaAluno ORDER BY nomeAluno ASC";
     $stmt3 = $PDO->prepare($sql3);
+    $stmt3->execute(array(':idTurmaAluno' => $Turma['idTurma']));
+
+    $sql4 = "SELECT idNota, idAtividade, idAluno, valorNota FROM Nota";
     $stmt4 = $PDO->prepare($sql4);
-    $stmt5 = $PDO->prepare($sql5);
-    $stmt6 = $PDO->prepare($sql6);
-    $stmt->execute(array(':idAluno' => $aux));
+    $stmt4->execute();
 ?>
 
 <!DOCTYPE HTML>
@@ -47,16 +47,9 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
-        <?php $Aluno = $stmt->fetch(PDO::FETCH_ASSOC)?>
 		<a href = "alunoLista.php?id=<?php echo $Aluno['idTurmaAluno']?>"><img src = "images/icone-voltar.png"></a><br>
-            <h2><p><?php echo $Aluno['nomeAluno']?></p></h2> 
-            <h3><p><?php echo $Aluno['matricula']?></p></h3>
-                
-            <?php $stmt2->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
-            <?php $stmt3->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
-            <?php $stmt4->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
-            <?php $stmt5->execute(array(':idTurmaAtividade' => $Aluno['idTurmaAluno'])); ?>
-            <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>    
+            <h2><p><?php echo $Atividade['nomeAtividade']?></p></h2> 
+            <h3><p><?php echo $Turma['nomeTurma']?></p></h3>  
         
 			<table>
                 <tr id="bim">

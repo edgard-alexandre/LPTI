@@ -1,53 +1,51 @@
 <?php
-    require_once 'init.php';
-    //abre a conexão
-    $PDO = db_connect();
-    //SQL para selecionar os registros
-    $sql = "SELECT idTurma, nomeTurma FROM Turma ORDER BY nomeTurma ASC";
-    // seleciona os registros
-    $stmt = $PDO->prepare($sql);
-    $stmt->execute();
-?>   
+    require 'init.php';
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Imperium</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="assets/css/mainScreen.css" />
-    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-</head>
+		<title>Imperium</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/mainScreen.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
 <body>
 <!-- Content -->
 <div id="content">
     <div class="inner">
-
+        <a href = "alunoLista.php?id=<?php echo $aux ?>"><img src = "images/icone-voltar.png"></a><br>
         <!-- Post -->
-        <article class="box post post-excerpt">
-            <header>
-                <!--
-                    Note: Titles and subtitles will wrap automatically when necessary, so don't worry
-                    if they get too long. You can also remove the <p> entirely if you don't
-                    need a subtitle.
-                -->
-			<h2>Lista de Turmas</h2>
-            </header>
-               <!-- <div class="dropdown">
-                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                   Escolha a Sala Desejada
-                   <span class="caret"></span>
-                   </button>
-                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
-				<table>
-                    <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-					<tr>
-						<td><a href = "alunoLista.php?id=<?php echo $Turma['idTurma']?>"><?php echo $Turma['nomeTurma'] ?></a></td>
-                    </tr>
-                   <?php endwhile;?>
-                    <a href="form-add-Turma.php"> Novo</a><br>
-				</table>
-        </article>
+        <form method ="post" name="formCadastro" action ="add-Atividade.php" enctype="multipart/form-data">
+        <h2>Cadastro de Atividades</h2>
+            <table width="100%">
+                <tr>
+                    <th width="18%">Nome</th>
+                    <td width="82%"><input type="text" name="txtAtividade"></td>
+                 </tr>
+                <tr>
+                    <th>Turma</th>
+                    <td><input type="text" id="turmaAtividade" name="txtTurmaAtividade"></td>
+                </tr>
+                <tr>
+                    <th>Bimestre</th>
+                    <td><input type="text" id="bimestreAtividade" name="txtBimestreAtividade"></td>
+                </tr>
+                <tr>
+                    <th>Tipo</th>
+                    <td><input type="text" id="tipoAtividade" name="txtTipoAtividade"></td>
+                </tr>
+                <tr>
+                    <th>Valor</th>
+                    <td><input type="text" id="valorAtividade" name="txtValorAtividade"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="btnEnviar" value="Cadastrar"></td>
+                    <td><input type="reset" name="btnLimpar" value="Limpar"></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 
@@ -58,13 +56,13 @@
 					<h1 id="logo"><a href="#">Imperium</a></h1>
 
 
-				<!-- Nav -->
+				<!-- Nav v-->
 					<nav id="nav">
 						<ul>
 							<li><a href="indexMain.html">Principal</a></li>
-							<li class="current"><a href="turmaRegistro.php">Registro de Alunos</a></li>
+							<li class="current"><a href="alunoRegistro.html">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
-							<li><a href="atividadeLista.php">Atividades</a></li>
+							<li><a href="relatorios.html">Atividades</a></li>
 						</ul>
 					</nav>
 				<!-- Calendar -->
