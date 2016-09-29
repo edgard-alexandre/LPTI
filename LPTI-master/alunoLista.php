@@ -53,11 +53,12 @@
 					<td><h5>MATRÍCULA</h5></td>
 					<td><h5>FREQUÊNCIA</h5></td>
 				</tr>
+				<form method="post" action="editFrequencia.php?id=<?php echo $aux ?>">
 				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 				<tr>
                     <td><a href = "alunoRegistro.php?id=<?php echo $Aluno['idAluno']?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
 					<td><?php echo $Aluno['matricula'] ?></a></td>
-                    <td><input type = "number" name = "<?php echo $Aluno['idAluno']?>" value = "<?php echo $Aluno['frequencia'] ?>"></td>
+                    <td><input type = "number" name = "freq[<?php echo $Aluno['idAluno']?>]" value = "<?php echo $Aluno['frequencia'] ?>"></td>
                     <td> 
                         <!--<a href="form-edit-clientes.php?id=<?php echo $cliente['idCliente'] ?>"> Editar
                         </a>
@@ -68,13 +69,14 @@
                 </tr>
                 <?php endwhile; ?>
 				<a href="form-add-Aluno.php?id=<?php echo $Turma['idTurma'] ?>"> Novo</a><br>
-				<a href="#"> Salvar Modificações</a>
+				<a href="editFrequencia.php?id=<?php echo $aux?>"> Salvar Modificações</a>
                 <!--editAluno.php?id="ID TURMA COMO PARÂMETRO"-->
             </tbody>
         </table>
         </article>
 		<!--EXCLUIR Turma-->
 			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente esta turma?')) location.href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>';"><img src = "images/pbi_deleteicon.png"></a>
+            <button type="submit">Salvar Alterações</button>
             <a href='form-editTurma.php?id=<?php echo $Turma['idTurma']?>'>Editar</a>
     </div>
 </div>
