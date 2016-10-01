@@ -16,10 +16,13 @@
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html lang = "pt-br">
+    <head>
+        <meta charset = "utf-8">
+    </head>    
 	<body>
 		<script>
-			 alert("frequencia alterada com sucesso!");
+			 alert("Alterações realizadas com sucesso!");
 			 location.href = "alunoLista.php?id=<?php echo $aux ?>"; 
 		</script>
 			

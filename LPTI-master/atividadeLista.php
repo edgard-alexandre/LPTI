@@ -4,10 +4,10 @@
     $PDO = db_connect();
     //SQL para selecionar os registros
     $sql = "SELECT idTurma, nomeTurma FROM Turma ORDER BY nomeTurma ASC";
-    $sql1 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '1º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql2 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '2º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql3 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '3º Bimestre' ORDER BY bimestreAtividade ASC";
-    $sql4 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '4º Bimestre' ORDER BY bimestreAtividade ASC";
+    $sql1 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '1º Bimestre' ORDER BY nomeAtividade ASC";
+    $sql2 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '2º Bimestre' ORDER BY nomeAtividade ASC";
+    $sql3 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '3º Bimestre' ORDER BY nomeAtividade ASC";
+    $sql4 = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade,tipoAtividade, idTurmaAtividade FROM Atividade WHERE bimestreAtividade = '4º Bimestre' ORDER BY nomeAtividade ASC";
     // seleciona os registros
     $stmt = $PDO->prepare($sql);
     $stmt1 = $PDO->prepare($sql1);
@@ -55,14 +55,14 @@
                     <td> </td>
                 </tr>
                 <tr>
-                    <td><h5>Atividade</h5></td>
-                    <td><h5>Turma</h5></td>
-                    <td><h5>Tipo</h5></td>
-                    <td><h5>Valor</h5></td>
+                    <td><h5>ATIVIDADE</h5></td>
+                    <td><h5>TURMA</h5></td>
+                    <td><h5>TIPO</h5></td>
+                    <td><h5>VALOR</h5></td>
                 </tr>
                 <?php while($Atividade = $stmt1->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><a href = "atividadeRegistro.php"><?php echo $Atividade['nomeAtividade']?><a></td>
+                    <td><a href = "atividadeRegistro.php?id=<?php echo $Atividade['idAtividade']?>"><?php echo $Atividade['nomeAtividade']?><a></td>
                     <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <?php if($Atividade['idTurmaAtividade'] == $Turma['idTurma']): ?>
                                 <td><?php echo $Turma['nomeTurma'] ?></td> 
@@ -84,14 +84,14 @@
                     <td> </td>
                 </tr>
                 <tr>
-                    <td><h5>Atividade</h5></td>
-                    <td><h5>Turma</h5></td>
-                    <td><h5>Tipo</h5></td>
-                    <td><h5>Valor</h5></td>
+                    <td><h5>ATIVIDADE</h5></td>
+                    <td><h5>TURMA</h5></td>
+                    <td><h5>TIPO</h5></td>
+                    <td><h5>VALOR</h5></td>
                 </tr>
                 <?php while($Atividade = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><a href = "atividadeRegistro.php"><?php echo $Atividade['nomeAtividade']?></a></td>
+                    <td><a href = "atividadeRegistro.php?id=<?php echo $Atividade['idAtividade']?>"><?php echo $Atividade['nomeAtividade']?></a></td>
                     <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <?php if($Atividade['idTurmaAtividade'] == $Turma['idTurma']): ?>
                                 <td><?php echo $Turma['nomeTurma'] ?></td> 
@@ -113,14 +113,14 @@
                     <td> </td>
                 </tr>
                 <tr>
-                    <td><h5>Atividade</h5></td>
-                    <td><h5>Turma</h5></td>
-                    <td><h5>Tipo</h5></td>
-                    <td><h5>Valor</h5></td>
+                    <td><h5>ATIVIDADE</h5></td>
+                    <td><h5>TURMA</h5></td>
+                    <td><h5>TIPO</h5></td>
+                    <td><h5>VALOR</h5></td>
                 </tr>
                 <?php while($Atividade = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><a href = "atividadeRegistro.php"><?php echo $Atividade['nomeAtividade']?></a></td>
+                    <td><a href = "atividadeRegistro.php?id=<?php echo $Atividade['idAtividade']?>"><?php echo $Atividade['nomeAtividade']?></a></td>
                     <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <?php if($Atividade['idTurmaAtividade'] == $Turma['idTurma']): ?>
                                 <td><?php echo $Turma['nomeTurma'] ?></td> 
@@ -142,14 +142,14 @@
                     <td> </td>
                 </tr>
                 <tr>
-                    <td><h5>Atividade</h5></td>
-                    <td><h5>Turma</h5></td>
-                    <td><h5>Tipo</h5></td>
-                    <td><h5>Valor</h5></td>
+                    <td><h5>ATIVIDADE</h5></td>
+                    <td><h5>TURMA</h5></td>
+                    <td><h5>TIPO</h5></td>
+                    <td><h5>VALOR</h5></td>
                 </tr>
                 <?php while($Atividade = $stmt4->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><a href = "atividadeRegistro.php"><?php echo $Atividade['nomeAtividade']?></a></td>
+                    <td><a href = "atividadeRegistro.php?id=<?php echo $Atividade['idAtividade']?>"><?php echo $Atividade['nomeAtividade']?></a></td>
                     <?php while($Turma = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <?php if($Atividade['idTurmaAtividade'] == $Turma['idTurma']): ?>
                                 <td><?php echo $Turma['nomeTurma'] ?></td> 

@@ -25,10 +25,10 @@ USE `imperium`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno`
+-- Estrutura da tabela `Aluno`
 --
 
-CREATE TABLE IF NOT EXISTS `aluno` (
+CREATE TABLE IF NOT EXISTS `Aluno` (
   `idAluno` int(11) NOT NULL AUTO_INCREMENT,
   `nomeAluno` varchar(45) NOT NULL,
   `matricula` varchar(45) NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `aluno` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
--- Extraindo dados da tabela `aluno`
+-- Extraindo dados da tabela `Aluno`
 --
 
-INSERT INTO `aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurmaAluno`) VALUES
+INSERT INTO `Aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurmaAluno`) VALUES
 (1, 'Edgard Alexandre Ribeiro', '201418110086', 35, 1),
 (3, 'Pedro de Deus Barbosa', '201418110138', 53, 1),
 (4, 'Vitor Carvalho de Melo', '201418110079', 73, 1),
@@ -57,10 +57,10 @@ INSERT INTO `aluno` (`idAluno`, `nomeAluno`, `matricula`, `frequencia`, `idTurma
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `anotacao`
+-- Estrutura da tabela `Anotacao`
 --
 
-CREATE TABLE IF NOT EXISTS `anotacao` (
+CREATE TABLE IF NOT EXISTS `Anotacao` (
   `idAnotacao` int(11) NOT NULL AUTO_INCREMENT,
   `nomeAnotacao` varchar(45) NOT NULL,
   `conteudoAnotacao` longtext NOT NULL,
@@ -73,10 +73,10 @@ CREATE TABLE IF NOT EXISTS `anotacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `atividade`
+-- Estrutura da tabela `Atividade`
 --
 
-CREATE TABLE IF NOT EXISTS `atividade` (
+CREATE TABLE IF NOT EXISTS `Atividade` (
   `idAtividade` int(11) NOT NULL AUTO_INCREMENT,
   `nomeAtividade` varchar(45) NOT NULL,
   `valorAtividade` float NOT NULL,
@@ -88,10 +88,10 @@ CREATE TABLE IF NOT EXISTS `atividade` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- Extraindo dados da tabela `atividade`
+-- Extraindo dados da tabela `Atividade`
 --
 
-INSERT INTO `atividade` (`idAtividade`, `nomeAtividade`, `valorAtividade`, `bimestreAtividade`, `tipoAtividade`, `idTurmaAtividade`) VALUES
+INSERT INTO `Atividade` (`idAtividade`, `nomeAtividade`, `valorAtividade`, `bimestreAtividade`, `tipoAtividade`, `idTurmaAtividade`) VALUES
 (1, 'Prova LP2', 10, '1º Bimestre', 'Prova', 1),
 (2, 'Prova de Física', 8, '3º Bimestre', 'Prova', 1),
 (3, 'Prova de LP1', 12, '2º Bimestre', 'Prova', 6),
@@ -106,10 +106,10 @@ INSERT INTO `atividade` (`idAtividade`, `nomeAtividade`, `valorAtividade`, `bime
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `nota`
+-- Estrutura da tabela `Nota`
 --
 
-CREATE TABLE IF NOT EXISTS `nota` (
+CREATE TABLE IF NOT EXISTS `Nota` (
   `idNota` int(11) NOT NULL AUTO_INCREMENT,
   `idAtividade` int(11) NOT NULL,
   `idAluno` int(11) NOT NULL,
@@ -120,10 +120,10 @@ CREATE TABLE IF NOT EXISTS `nota` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
--- Extraindo dados da tabela `nota`
+-- Extraindo dados da tabela `Nota`
 --
 
-INSERT INTO `nota` (`idNota`, `idAtividade`, `idAluno`, `valorNota`) VALUES
+INSERT INTO `Nota` (`idNota`, `idAtividade`, `idAluno`, `valorNota`) VALUES
 (1, 1, 1, 10),
 (2, 1, 3, 7),
 (4, 1, 4, 10),
@@ -148,39 +148,39 @@ INSERT INTO `nota` (`idNota`, `idAtividade`, `idAluno`, `valorNota`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `senha`
+-- Estrutura da tabela `Login`
 --
 
-CREATE TABLE IF NOT EXISTS `senha` (
+CREATE TABLE IF NOT EXISTS `Login` (
   `idSenha` int(11) NOT NULL AUTO_INCREMENT,
   `senha` varchar(56) NOT NULL,
   PRIMARY KEY (`idSenha`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Extraindo dados da tabela `senha`
+-- Extraindo dados da tabela `Login`
 --
 
-INSERT INTO `senha` (`idSenha`, `senha`) VALUES
-(1, 'admina');
+INSERT INTO `Login` (`idSenha`, `senha`) VALUES
+(1, 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `turma`
+-- Estrutura da tabela `Turma`
 --
 
-CREATE TABLE IF NOT EXISTS `turma` (
+CREATE TABLE IF NOT EXISTS `Turma` (
   `idTurma` int(11) NOT NULL AUTO_INCREMENT,
   `nomeTurma` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTurma`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
--- Extraindo dados da tabela `turma`
+-- Extraindo dados da tabela `Turma`
 --
 
-INSERT INTO `turma` (`idTurma`, `nomeTurma`) VALUES
+INSERT INTO `Turma` (`idTurma`, `nomeTurma`) VALUES
 (1, '3° Informática'),
 (2, '2° Edificações'),
 (6, '1º Informática'),
@@ -193,29 +193,29 @@ INSERT INTO `turma` (`idTurma`, `nomeTurma`) VALUES
 --
 
 --
--- Limitadores para a tabela `aluno`
+-- Limitadores para a tabela `Aluno`
 --
-ALTER TABLE `aluno`
-  ADD CONSTRAINT `Aluno_ibfk_1` FOREIGN KEY (`idTurmaAluno`) REFERENCES `turma` (`idTurma`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Aluno`
+  ADD CONSTRAINT `Aluno_ibfk_1` FOREIGN KEY (`idTurmaAluno`) REFERENCES `Turma` (`idTurma`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `anotacao`
+-- Limitadores para a tabela `Anotacao`
 --
-ALTER TABLE `anotacao`
-  ADD CONSTRAINT `Anotacao_ibfk_1` FOREIGN KEY (`idTurmaAnotacao`) REFERENCES `turma` (`idTurma`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Anotacao`
+  ADD CONSTRAINT `Anotacao_ibfk_1` FOREIGN KEY (`idTurmaAnotacao`) REFERENCES `Turma` (`idTurma`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `atividade`
+-- Limitadores para a tabela `Atividade`
 --
-ALTER TABLE `atividade`
-  ADD CONSTRAINT `Atividade_ibfk_1` FOREIGN KEY (`idTurmaAtividade`) REFERENCES `turma` (`idTurma`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Atividade`
+  ADD CONSTRAINT `Atividade_ibfk_1` FOREIGN KEY (`idTurmaAtividade`) REFERENCES `Turma` (`idTurma`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `nota`
+-- Limitadores para a tabela `Nota`
 --
-ALTER TABLE `nota`
-  ADD CONSTRAINT `Nota_ibfk_1` FOREIGN KEY (`idAtividade`) REFERENCES `atividade` (`idAtividade`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Nota_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`idAluno`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Nota`
+  ADD CONSTRAINT `Nota_ibfk_1` FOREIGN KEY (`idAtividade`) REFERENCES `Atividade` (`idAtividade`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Nota_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `Aluno` (`idAluno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

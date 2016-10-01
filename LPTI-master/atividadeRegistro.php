@@ -2,26 +2,18 @@
     require_once 'init.php';
     // abre a conexão
     $PDO = db_connect();
-	$aux = $_GET["id"];
+	$id = $_GET["id"];
     // SQL para selecionar os registros
-    $sql = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idAtividade = :idAtividade";
+	$sql = "SELECT idAtividade, nomeAtividade, valorAtividade, bimestreAtividade, tipoAtividade, idTurmaAtividade FROM Atividade WHERE idAtividade = :idAtividade ORDER BY bimestreAtividade ASC";
+    $sql2 = "SELECT idAluno, nomeAluno, matricula, frequencia, idTurmaAluno FROM Aluno WHERE idTurmaAluno = :idTurmaAluno ORDER BY nomeAluno ASC";
+    $sql3 = "SELECT idNota, idAtividade, idAluno, valorNota FROM Nota WHERE idAtividade = :idAtividadeNota";
+    $sql4 = "SELECT idTurma, nomeTurma FROM Turma WHERE idTurma = :idTurma";
+    // seleciona os registros
     $stmt = $PDO->prepare($sql);
-    $stmt->execute(array(':idAtividade' => $aux));
-    $Atividade = $stmt->fetch(PDO::FETCH_ASSOC)
-    echo $Atividade['idTurmaAtividade'];
-        
-    $sql2 = "SELECT idTurma, nomeTurma FROM Turma WHERE idTurma = :idTurma";
-    $stmt2 = $PDO->prepare($sql2);
-    $stmt2->execute(array(':idTurma' => $Atividade['idTurmaAtividade']));
-    $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)
-
-    $sq3 = "SELECT idAluno, nomeAluno, matricula, idTurmaAluno FROM Aluno WHERE idTurmaAluno = :idTurmaAluno ORDER BY nomeAluno ASC";
+	$stmt2 = $PDO->prepare($sql2);
     $stmt3 = $PDO->prepare($sql3);
-    $stmt3->execute(array(':idTurmaAluno' => $Turma['idTurma']));
-
-    $sql4 = "SELECT idNota, idAtividade, idAluno, valorNota FROM Nota";
     $stmt4 = $PDO->prepare($sql4);
-    $stmt4->execute();
+    $stmt->execute(array(':idAtividade' => $id));
 ?>
 
 <!DOCTYPE HTML>
@@ -47,158 +39,47 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
-		<a href = "alunoLista.php?id=<?php echo $Aluno['idTurmaAluno']?>"><img src = "images/icone-voltar.png"></a><br>
-            <h2><p><?php echo $Atividade['nomeAtividade']?></p></h2> 
-            <h3><p><?php echo $Turma['nomeTurma']?></p></h3>  
+        <?php $Atividade = $stmt->fetch(PDO::FETCH_ASSOC)?>
+		<a href = "atividadeLista.php"><img src = "images/setaVoltar.png"></a><br>
+            <?php $stmt4->execute(array(':idTurma' => $Atividade['idTurmaAtividade'])); ?>
+            <?php $Turma = $stmt4->fetch(PDO::FETCH_ASSOC)?>
+            
+            <h2><p><?php echo $Atividade['nomeAtividade']?></p></h2>
+            <h3><p><?php echo $Turma['nomeTurma']?></p></h3>
+            <h3><p>VALOR: <?php echo $Atividade['valorAtividade']?></p></h3> 
+            
+            <?php
+            $turmaAtividade = $Atividade['idTurmaAtividade'];
+        
+            $stmt2->execute(array(':idTurmaAluno' => $turmaAtividade));
+            $stmt3->execute(array(':idAtividadeNota' => $Atividade['idAtividade']));
+        ?>
         
 			<table>
-                <tr id="bim">
-                    <td><h5>1º Bimestre</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-				<tr>
-					<td><h5>ATIVIDADE</h5></td>
-					<td><h5>VALOR</h5></td>
-					<td><h5>TIPO</h5></td>
+				<tr id = "bim">
+					<td><h5>ALUNO</h5></td>
+					<td><h5>MATRICULA</h5></td>
                     <td><h5>NOTA</h5></td>
 				</tr>
-				 <?php while($Atividade = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
+				 <?php while($Aluno = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
                         <tr>
-                            <td><?php echo $Atividade['nomeAtividade'] ?></td>
-                            <td><?php echo $Atividade['valorAtividade'] ?></td>
-                            <td><?php echo $Atividade['tipoAtividade'] ?></td>
-                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
-                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
-                                    <?php $pnota = $pnota + $Nota['valorNota']; ?>
+                            <td><?php echo $Aluno['nomeAluno'] ?></td>
+                            <td><?php echo $Aluno['matricula'] ?></td>
+                           <?php while($Nota = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
+                                <?php if($Nota['idAluno'] == $Aluno['idAluno']): ?>
+                                    <td><?php echo $Nota['valorNota'] ?></td> 
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                        </tr>
-                        <?php $stmt6 = $PDO->prepare($sql6); ?>
-                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>   
+                        </tr>  
+                    <?php $stmt3 = $PDO->prepare($sql3); ?>
+                    <?php $stmt3->execute(array(':idAtividadeNota' => $Atividade['idAtividade'])); ?>
                 <?php endwhile; ?>
-                <tr id = "bim">
-                    <td><h5>NOTA TOTAL: <?php echo $pnota ?>/20</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td><h5>-</h5></td>
-                </tr>
-                <tr id="bim">
-                    <td><h5>2º Bimestre</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-				<tr>
-					<td><h5>ATIVIDADE</h5></td>
-					<td><h5>VALOR</h5></td>
-					<td><h5>TIPO</h5></td>
-                    <td><h5>NOTA</h5></td>
-				</tr>
-				 <?php while($Atividade = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
-                        <tr>
-                            <td><?php echo $Atividade['nomeAtividade'] ?></td>
-                            <td><?php echo $Atividade['valorAtividade'] ?></td>
-                            <td><?php echo $Atividade['tipoAtividade'] ?></td>
-                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
-                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
-                                    <?php $snota = $snota + $Nota['valorNota']; ?>
-                                <?php endif; ?>
-                            <?php endwhile; ?>
-                        </tr>
-                        <?php $stmt6 = $PDO->prepare($sql6); ?>
-                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>  
-                <?php endwhile; ?>
-                <tr id = "bim">
-                    <td><h5>NOTA TOTAL: <?php echo $snota ?>/30</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td><h5>-</h5></td>
-                </tr>
-                <tr id="bim">
-                    <td><h5>3º Bimestre</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-				<tr>
-					<td><h5>ATIVIDADE</h5></td>
-					<td><h5>VALOR</h5></td>
-					<td><h5>TIPO</h5></td>
-                    <td><h5>NOTA</h5></td>
-				</tr>
-				 <?php while($Atividade = $stmt4->fetch(PDO::FETCH_ASSOC)): ?>
-                        <tr>
-                            <td><?php echo $Atividade['nomeAtividade'] ?></td>
-                            <td><?php echo $Atividade['valorAtividade'] ?></td>
-                            <td><?php echo $Atividade['tipoAtividade'] ?></td>
-                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
-                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
-                                   <?php $tnota = $tnota + $Nota['valorNota']; ?>
-                                <?php endif; ?>
-                            <?php endwhile; ?>
-                        </tr>
-                        <?php $stmt6 = $PDO->prepare($sql6); ?>
-                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?>  
-                <?php endwhile; ?>
-                <tr id = "bim">
-                    <td><h5>NOTA TOTAL: <?php echo $tnota ?>/20</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-                <tr>
-                    <td><h5>-</h5></td>
-                </tr>
-                <tr id="bim">
-                    <td><h5>4º Bimestre</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-				<tr>
-					<td><h5>ATIVIDADE</h5></td>
-					<td><h5>VALOR</h5></td>
-					<td><h5>TIPO</h5></td>
-                    <td><h5>NOTA</h5></td>
-				</tr>
-				 <?php while($Atividade = $stmt4->fetch(PDO::FETCH_ASSOC)): ?>
-                        <tr>
-                            <td><?php echo $Atividade['nomeAtividade'] ?></td>
-                            <td><?php echo $Atividade['valorAtividade'] ?></td>
-                            <td><?php echo $Atividade['tipoAtividade'] ?></td>
-                            <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
-                                <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
-                                   <?php $qnota = $qnota + $Nota['valorNota']; ?>
-                                <?php endif; ?>
-                            <?php endwhile; ?>
-                        </tr>
-                        <?php $stmt6 = $PDO->prepare($sql6); ?>
-                        <?php $stmt6->execute(array(':idAlunoNota' => $aux)); ?> 
-                <?php endwhile; ?>
-                <tr id = "bim">
-                    <td><h5>NOTA TOTAL: <?php echo $qnota ?>/30</h5></td>
-                    <td><h5> </h5></td>
-					<td><h5> </h5></td>
-                    <td> </td>
-                </tr>
-            </tbody>
         </table>
         </article>
     
 		<!--EXCLUIR Aluno-->
-        <a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente este aluno?')) location.href = 'deleteAluno.php?id=<?php echo $Aluno['idAluno']?>';"><img src = "images/pbi_deleteicon.png"></a>
+        <a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente este aluno?')) location.href = '#';"><img src = "images/pbi_deleteicon.png"></a>
+        <a href='#'>Editar</a>
     </div>
 </div>
 
@@ -213,9 +94,9 @@
 					<nav id="nav">
 						<ul>
 							<li><a href="indexMain.html">Principal</a></li>
-							<li class="current"><a href="turmaRegistro.php">Registro de Alunos</a></li>
+							<li><a href="turmaRegistro.php">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
-							<li><a href="relatorios.html">Atividades</a></li>
+							<li class="current"><a href="atividadeLista.php">Atividades</a></li>
 						</ul>
 					</nav>
 				<!-- Calendar -->

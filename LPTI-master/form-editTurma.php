@@ -22,7 +22,7 @@
 <!-- Content -->
 <div id="content">
     <div class="inner">
-        <a href = "alunoLista.php?id=<?php echo $aux ?>"><img src = "images/icone-voltar.png"></a><br>
+        <a href = "alunoLista.php?id=<?php echo $aux ?>"><img src = "images/setaVoltar.png"></a><br>
         <!-- Post -->
         <form method ="post" name="formCadastro" action ="editTurma.php?id=<?php echo $Turma['idTurma']?>" enctype="multipart/form-data">
         <h2>Alterando informações da Turma</h2>
@@ -52,7 +52,7 @@
 							<li><a href="indexMain.html">Principal</a></li>
 							<li class="current"><a href="alunoRegistro.html">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
-							<li><a href="relatorios.html">Atividades</a></li>
+							<li><a href="atividadeLista.php">Atividades</a></li>
 						</ul>
 					</nav>
 				<!-- Calendar -->

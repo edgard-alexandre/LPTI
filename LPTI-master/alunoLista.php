@@ -41,7 +41,7 @@
                     if they get too long. You can also remove the <p> entirely if you don't
                     need a subtitle.
                 -->
-		<a href = "turmaRegistro.php"><img src = "images/icone-voltar.png"></a><br>
+		<a href = "turmaRegistro.php"><img src = "images/setaVoltar.png"></a><br>
         <h2>
 			<?php $Turma = $stmt2->fetch(PDO::FETCH_ASSOC)?>
 			<p><?php echo $Turma['nomeTurma']?></p>
@@ -53,12 +53,12 @@
 					<td><h5>MATRÍCULA</h5></td>
 					<td><h5>FREQUÊNCIA</h5></td>
 				</tr>
-				<form method="post" action="editFrequencia.php?id=<?php echo $aux ?>">
+                <form method="post" action="editFrequencia.php?id=<?php echo $aux ?>">
 				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 				<tr>
                     <td><a href = "alunoRegistro.php?id=<?php echo $Aluno['idAluno']?>"><?php echo $Aluno['nomeAluno'] ?></a></td>
 					<td><?php echo $Aluno['matricula'] ?></a></td>
-                    <td><input type = "number" name = "freq[<?php echo $Aluno['idAluno']?>]" value = "<?php echo $Aluno['frequencia'] ?>"></td>
+            <td><input type = "number" name = "freq[<?php echo $Aluno['idAluno']?>]" value = "<?php echo $Aluno['frequencia'] ?>"></td>
                     <td> 
                         <!--<a href="form-edit-clientes.php?id=<?php echo $cliente['idCliente'] ?>"> Editar
                         </a>
@@ -69,7 +69,6 @@
                 </tr>
                 <?php endwhile; ?>
 				<a href="form-add-Aluno.php?id=<?php echo $Turma['idTurma'] ?>"> Novo</a><br>
-				<a href="editFrequencia.php?id=<?php echo $aux?>"> Salvar Modificações</a>
                 <!--editAluno.php?id="ID TURMA COMO PARÂMETRO"-->
             </tbody>
         </table>
@@ -94,7 +93,7 @@
 							<li><a href="indexMain.html">Principal</a></li>
 							<li class="current"><a href="turmaRegistro.php">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
-							<li><a href="relatorios.html">Atividades</a></li>
+							<li><a href="atividadeLista.php">Atividades</a></li>
 						</ul>
 					</nav>
 				<!-- Calendar -->
