@@ -83,6 +83,7 @@
 					<td><h5>TIPO</h5></td>
                     <td><h5>NOTA</h5></td>
 				</tr>
+			    <form method="post" action="editNota.php?id=<?php echo $aux ?>">
 				 <?php while($Atividade = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
                         <tr>
                             <td><?php echo $Atividade['nomeAtividade'] ?></td>
@@ -90,7 +91,7 @@
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                    <td><input type="number" step="any" name="nota[<?php echo $Nota['idNota']?>]" value="<?php echo $Nota['valorNota']?>"></td> 
                                     <?php $pnota = $pnota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -139,7 +140,7 @@
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                   <td><input type="number" name="nota[<?php echo $Nota['idNota']?>]" value="<?php echo $Nota['valorNota']?>"></td> 
                                     <?php $snota = $snota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -188,7 +189,7 @@
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                   <td><input type="number" name="nota[<?php echo $Nota['idNota']?>]" value="<?php echo $Nota['valorNota']?>"></td> 
                                    <?php $tnota = $tnota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -237,7 +238,7 @@
                             <td><?php echo $Atividade['tipoAtividade'] ?></td>
                             <?php while($Nota = $stmt6->fetch(PDO::FETCH_ASSOC)): ?>
                                 <?php if($Nota['idAtividade'] == $Atividade['idAtividade']): ?>
-                                   <td><?php echo $Nota['valorNota'] ?></td> 
+                                   <td><input type="number" name="nota[<?php echo $Nota['idNota']?>]" value="<?php echo $Nota['valorNota']?>"></td> 
                                    <?php $qnota = $qnota + $Nota['valorNota']; ?>
                                 <?php endif; ?>
                             <?php endwhile; ?>
@@ -253,11 +254,13 @@
                 </tr>
             </tbody>
         </table>
+          
         </article>
     
 		<!--EXCLUIR Turma, EDITAR Turma e Salvar Aterações-->
         <a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente este aluno?')) location.href = 'deleteAluno.php?id=<?php echo $Aluno['idAluno']?>';"><img src = "images/pbi_deleteicon.png"></a>
         <a href='form-editAluno.php?id=<?php echo $Aluno['idAluno']?>'>Editar</a>
+        <button type="submit">Salvar Alterações</button>
     </div>
 </div>
 

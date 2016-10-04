@@ -54,6 +54,7 @@
 					<td><h5>FREQUÊNCIA</h5></td>
 				</tr>
                 <form method="post" action="editFrequencia.php?id=<?php echo $aux ?>">
+
 				 <?php while($Aluno = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
 				<tr>
                     <td><a href = "alunoRegistro.php?id=<?php echo $Aluno['idAluno']?>"><?php echo $Aluno['nomeAluno'] ?></a></td>

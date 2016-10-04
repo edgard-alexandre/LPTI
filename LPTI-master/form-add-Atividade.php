@@ -15,7 +15,7 @@
 <!-- Content -->
 <div id="content">
     <div class="inner">
-        <a href = "alunoLista.php?id=<?php echo $aux ?>"><img src = "images/setaVoltar.png"></a><br>
+        <a href = "atividadeLista.php"><img src = "images/setaVoltar.png"></a><br>
         <!-- Post -->
         <form method ="post" name="formCadastro" action ="add-Atividade.php" enctype="multipart/form-data">
         <h2>Cadastro de Atividades</h2>
@@ -60,9 +60,9 @@
 					<nav id="nav">
 						<ul>
 							<li><a href="indexMain.html">Principal</a></li>
-							<li class="current"><a href="alunoRegistro.html">Registro de Alunos</a></li>
+							<li><a href="alunoRegistro.html">Registro de Alunos</a></li>
 							<li><a href="calendario.html">Agenda</a></li>
-							<li><a href="relatorios.html">Atividades</a></li>
+							<li class="current"><a href="relatorios.html">Atividades</a></li>
 						</ul>
 					</nav>
 				<!-- Calendar -->
