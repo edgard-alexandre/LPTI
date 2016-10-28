@@ -258,9 +258,14 @@
         </article>
     
 		<!--EXCLUIR Turma, EDITAR Turma e Salvar Aterações-->
-        <a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente este aluno?')) location.href = 'deleteAluno.php?id=<?php echo $Aluno['idAluno']?>';"><img src = "images/pbi_deleteicon.png"></a>
+        <a onClick = "$('#divExclusao').show()"><img src = "images/pbi_deleteicon.png"></a>
         <a href='form-editAluno.php?id=<?php echo $Aluno['idAluno']?>'>Editar</a>
         <button type="submit">Salvar Alterações</button>
+        <div id="divExclusao" style="display:none">
+				   <h5>Deseja realmente excluir este Aluno? <h5>
+				   <a href = 'deleteAluno.php?id=<?php echo $Aluno['idAluno']?>'>Sim</a>
+				   <a href="#" onClick="$('#divExclusao').hide();">Não</a>
+</div>
     </div>
 </div>
 

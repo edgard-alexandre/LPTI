@@ -75,9 +75,14 @@
         </table>
         </article>
 		<!--EXCLUIR Turma-->
-			<a onClick = "if(confirm('Tem certeza que deseja excluir permanentemente esta turma?')) location.href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>';"><img src = "images/pbi_deleteicon.png"></a>
+			<a onClick = "$('#divExclusao').show();"><img src = "images/pbi_deleteicon.png"></a>
             <button type="submit">Salvar Alterações</button>
             <a href='form-editTurma.php?id=<?php echo $Turma['idTurma']?>'>Editar</a>
+            <div id="divExclusao" style="display:none">
+				   <h5>Deseja realmente excluir esta turma? <h5>
+				   <a href = 'deleteTurma.php?id=<?php echo $Turma['idTurma']?>'>Sim</a>
+				   <a href="#" onClick="$('#divExclusao').hide();">Não</a>
+</div>
     </div>
 </div>
 
